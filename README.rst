@@ -1,11 +1,11 @@
 Trailerpark is a blog.
 
-Status:
+*Status:*
 
  On the horizon.  Lacks basic features such as creating articles, so don't crack open the Coors Light just yet.
 
 
-Requirements:
+*Requirements:*
 
  - Python 2.6 or later (3 not supported)
  - CouchDB
@@ -14,7 +14,8 @@ Requirements:
  - Some plugins may have additional dependencies
 
 
-Deployment:
+*Deployment:*
+
 Nginx_ is recommended.  Here's a basic Nginx configuration for Trailerpark::
 
  server {
