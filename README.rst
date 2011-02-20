@@ -13,6 +13,13 @@ Trailerpark is a blog.
  - Breve_     
  - Some plugins may have additional dependencies
 
+**Installation**
+
+ - Edit tp.conf.  Make some changes.
+ - Run "./tp.py --install", this will create the database, some views and maybe a doc or two.
+ - Run "./tp.py"
+ - No software installation at this point, just run it from the source directory.
+ - Tornado isn't configured to serve static resources, so you'll need to run it behind a webserver (such as Nginx_).
 
 **Deployment:**
 
