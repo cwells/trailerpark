@@ -9,7 +9,10 @@ Requirements:
 
  - Python 2.6 or later (3 not supported)
  - CouchDB
- - Breve
- - other stuff, to be documented
+ - Tornado_
+ - Breve_     
+ - Some plugins may have additional dependencies
 
 
+.. _Tornado: https://github.com/facebook/tornado
+.. _Breve:   https://github.com/cwells/breve
