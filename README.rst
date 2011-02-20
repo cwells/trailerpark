@@ -48,3 +48,4 @@ Nginx_ is recommended.  Here's a basic Nginx configuration for Trailerpark::
 
 .. _Tornado: https://github.com/facebook/tornado
 .. _Breve:   https://github.com/cwells/breve
+.. _Nginx:   http://wiki.nginx.org
