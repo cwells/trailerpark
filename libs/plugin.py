@@ -237,3 +237,5 @@ class PluginTemplateLoader (object):
 plugins = Plugins ()
 breve.register_global ('plugins', plugins)
 breve.register_global ('plugin_loader', PluginTemplateLoader ())
+
+

@@ -10,6 +10,7 @@ today = datetime.today ().strftime ('%Y/%m/%d') # used in welcome doc
 
 depends  = ['installer', 'theme']
 provides = 'blog'
+macros   = ['macros']
 install  = {
     "views": {
         "articles_by_date": {

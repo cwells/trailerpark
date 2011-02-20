@@ -5,7 +5,7 @@ You can obtain your flickr user ID at http://www.flickr.com/services/api/explore
 
 settings = {
     'user_id': '30531103@N00',
-    'thumb_count': 9
+    'thumb_count': 6
 }
 
 target    = 'sidebar'

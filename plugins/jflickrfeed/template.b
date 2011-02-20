@@ -8,9 +8,7 @@ inlineJS ('''
     });
 ''' % flickr_data),
 
-div ( class_="box" ) [
-    h2 [ "Flickr Photos" ],
-    div ( id='flickr' )
-]
+div ( id='flickr' )
+
 
 
