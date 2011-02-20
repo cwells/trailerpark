@@ -19,7 +19,7 @@ html [
 
         # comment this stanza and the logo img to remove the logo
         style (type="text/css") [ '''
-            #headerimg #logo { float: left; margin: 5px 170px; position: absolute;}
+            #headerimg #logo { float: left; margin-top: 4px; margin-left: 204px; margin-right: -170px; }
         ''' ]
     ],
     
@@ -28,8 +28,8 @@ html [
             div (id_="header") [
                 div (id_="headerimg") [
                     h1 [ 
-                        a (href_="/") [ 
-                            img (id="logo", src="/images/trailerpark.png"),
+                        a (href_="/") [
+                            img (id="logo", src="/images/trailerpark.png"), 
                             config ['blog_title'],
                         ] 
                     ],
