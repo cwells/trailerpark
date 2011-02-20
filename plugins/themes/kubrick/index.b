@@ -19,7 +19,7 @@ html [
 
         # comment this stanza and the logo img to remove the logo
         style (type="text/css") [ '''
-            #headerimg #logo { float: left; margin-top: 4px; margin-left: 204px; margin-right: -170px; }
+            #logo { margin: 0; padding: 0; }
         ''' ]
     ],
     
@@ -30,7 +30,7 @@ html [
                     h1 [ 
                         a (href_="/") [
                             img (id="logo", src="/images/trailerpark.png"), 
-                            config ['blog_title'],
+                            config ['blog_title']
                         ] 
                     ],
                     div (class_="description") [ config ['blog_description'] ]
