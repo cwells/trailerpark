@@ -1,0 +1,72 @@
+#content .featured {
+    padding: 5px 30px 10px;
+}
+#content .featured h2.title {
+    float: left;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    color: #ffffff;
+    background-color: #212121;
+    padding: 5px 8px;
+    font-weight: normal;
+    margin-bottom: 10px;
+}
+#content .featured .thumb {
+    width: 590px; height: 315px;
+    padding: 5px;
+    border: 1px solid #E9E9E9;
+    background-color: #F2F2F1;
+    clear: both;
+}
+#content .featured .b {
+    width: 589px; height: 315px;
+    overflow: hidden;
+    position: relative;
+}
+#content .featured .photo {
+    list-style-type: none;
+}
+#content .photo li {
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 0;
+}
+#content .photo li.first {
+    z-index: 2;
+}
+#content .photo li img {
+    width: 589px;
+}
+#content .featured .text {
+    list-style-type: none;
+}
+#content .featured .text li {
+    width: 230px; height: 285px;
+    position: absolute;
+    top: 0; right: -270px;
+    padding: 15px;
+    color: #ffffff;
+    font-family: Verdana;
+    background: url(shade.png) repeat 0 0;
+    z-index: 4;
+}
+#content .featured .text li.first {
+    right: 0;
+}
+#content .featured .text h2 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+}
+#content .featured .text p {
+    line-height: 1.6em;
+    margin-bottom: 15px;
+}
+#content .featured .text a {
+    color: #ffffff;
+    text-decoration: none;
+}
+#content .featured .text .readmore {
+    font-size: 0.9em;
+    font-weight: bold;
+    text-transform: uppercase;
+}

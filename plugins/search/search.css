@@ -1,0 +1,21 @@
+#sidebar .search {
+    border: 1px solid #212121;
+    margin-bottom: 10px;
+    height: 29px;
+}
+#sidebar .search input {
+    border: 0;
+    float: left;
+    width: 220px;
+    margin: 6px 4px;
+}
+#sidebar .search button {
+    border: 0;
+    background-color: #212121;
+    color: #ffffff;
+    font-size: 0.8em;
+    font-weight: bold;
+    text-transform: uppercase;
+    width: 38px; height: 29px;
+    float: right;
+}
