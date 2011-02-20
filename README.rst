@@ -26,7 +26,6 @@ Nginx_ is recommended.  Here's a basic Nginx configuration for Trailerpark::
      error_log   /var/log/nginx/trailerpark-error_log info;
  
      root /var/www/trailerpark/static;
-     ssi on;
 
      location / {
          try_files $uri @tornado;
