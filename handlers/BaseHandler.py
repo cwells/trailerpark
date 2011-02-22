@@ -18,7 +18,6 @@ breve.register_global ('config', {
     'blog_author': options.author
 })
 
-
 def Template ():
     return breve.Template (T, options.templates)
 

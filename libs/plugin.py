@@ -35,15 +35,15 @@ class Plugins (object):
     def __init__ (self):
         logging.info ("=== loading plugins ===")
         self._plugins = {}
-        self._skip = []
-        for p in options.plugins:
-            module = self.load (p)
+
+        for p, target in options.plugins:
+            module = self.load (p, target)
             if not module:
                 continue
             self._plugins [p] = module
 
         unmet = self.check_dependencies ()
-        options.plugins = [p for p in options.plugins 
+        options.plugins = [(p, t) for (p, t) in options.plugins 
                            if (p in self._plugins and p not in unmet)]
         if unmet:
             logging.error ("unmet dependencies for plugins: %s" % ', '.join (unmet))
@@ -53,7 +53,7 @@ class Plugins (object):
 
         self.configure_theme ()
 
-    def load (self, plugin):
+    def load (self, plugin, target=None):
         '''import and initialize a single plugin
         '''
         logging.info ("loading %s plugin" % plugin)
@@ -68,6 +68,7 @@ class Plugins (object):
             return
         
         self.pluginify (module)
+        module.target = target
         if options.install:
             self.install (plugin, module)
 
@@ -84,7 +85,7 @@ class Plugins (object):
     def configure_theme (self):
         logging.info ("=== prepare theme ===")
         theme = None
-        for p in options.plugins:
+        for p in self._plugins:
             if self._plugins [p].provides == 'theme':
                 theme = p
                 options.templates = 'plugins/%s' % theme
@@ -169,9 +170,7 @@ class Plugins (object):
     def index (self, url, target=None):
         '''return a list of plugins for a named target
         '''
-        for p in options.plugins: # retain order
-            if p in self._skip: 
-                continue
+        for p, t in options.plugins: # retain order
             plugin = self._plugins [p]
             if target is None or plugin.target == target:
                 if plugin.url is None or re.match (plugin.url, url):
@@ -184,17 +183,6 @@ class Plugins (object):
         to make it invisible in templates.
         '''
         return self._plugins.get (plugin, '')
-
-    def grab (self, plugin):
-        '''tests for a plugin and prevents it from
-        being rendered a second time by dropping it
-        from the index.
-        '''
-        p = self._plugins.get (plugin, '')
-        if p:
-            if p not in self._skip:
-                self._skip.append (plugin)
-        return p
 
     def css (self, plugin):
         '''return the css resources for a plugin
@@ -237,5 +225,6 @@ class PluginTemplateLoader (object):
 plugins = Plugins ()
 breve.register_global ('plugins', plugins)
 breve.register_global ('plugin_loader', PluginTemplateLoader ())
+
 
 

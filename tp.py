@@ -31,7 +31,6 @@ define ("author",       default='', help="blog author", type=str)
 define ("plugins",      default=[], help="an ordered list of plugins to load", type=list)
 define ("install",      default=False, help="run installation plugin", type=bool)
 
-
 tornado.options.parse_config_file (options.config)
 tornado.options.parse_command_line ()
 options.cookie_secret = b64encode (options.secret)

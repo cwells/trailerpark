@@ -12,8 +12,16 @@
 */
 
 /* Begin Typography & Colors */
+.tagline, .tags { 
+    font-size: 75%;
+    padding: 4px 10px;
+}
 
-#recent_articles ul {
+.entry ul li:before, #sidebar ul li:before {
+    content: "\00BB \0020";
+}
+
+#recent_articles {
    list-style: none;
 }
 
@@ -25,6 +33,13 @@
     font-family: 'Lucida Grande', Verdana, Sans-Serif;
     font-size:1.2em; 
 }
+#sidebar .plugin {
+    margin-top: 2em;
+}
+#sidebar .plugin ul { 
+    list-style: none; 
+}
+
 h3 { font-size:1.3em; }
 h1, h1 a, h1 a:hover, h1 a:visited, #headerimg .description {
     text-decoration: none;

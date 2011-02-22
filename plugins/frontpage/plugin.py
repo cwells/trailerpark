@@ -3,6 +3,6 @@
 
 target    = 'content'
 url       = '^$' # only display on /
-depends   = ['article']
+depends   = ['blog','article']
 templates = ['template']
 views     = ['articles_by_date']

@@ -1,4 +1,4 @@
-form ( action="/", class_="search" ) [
-    input ( type_="text", name="s", id="s", value="" ),
-    button ( type_="submit" ) [ "Go" ]
+form (action="/", id="search") [
+    input (type_="text", name="search", id="search", value=""),
+    button (type_="submit") [ "Go" ]
 ]

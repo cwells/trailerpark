@@ -1,6 +1,6 @@
 inlineJS ('''
     $(document).ready (function () {
-        $('#flickr').jflickrfeed ({
+        $('#jflickrfeed').jflickrfeed ({
 	    limit: %(thumb_count)s,
 	    qstrings: {id: '%(user_id)s'},
 	    itemTemplate: '<a href="{{image_b}}" rel="facybox"><img src="{{image_s}}" alt="{{title}}" /></a>'
@@ -8,7 +8,7 @@ inlineJS ('''
     });
 ''' % flickr_data),
 
-div ( id='flickr' )
+div ( id='jflickrfeed' )
 
 
 

@@ -1,5 +1,5 @@
-[ [ include (_tpl, loader=plugin_loader)
-    for _tpl in plugins.macros (_plugin) ]
+# include global macros.  this is required.
+[ include (plugins.macros (_plugin), loader=plugin_loader) 
   for _plugin in plugins.index (v.current_page) ],
 
 html [
@@ -33,10 +33,23 @@ html [
             ],
             
             div (id_="sidebar") [
+                # plugins.has ('recent_articles') and (
+                #     div (class_='plugin') [
+                #         h2 [ "Recent Articles" ],
+                #         include (plugins.templates ('recent_articles'), loader=plugin_loader)
+                #     ]
+                # ),
+
+                # plugins.has ('jflickrfeed') and (
+                #     div (class_='plugin') [
+                #         h2 [ "Flickr" ],
+                #         include (plugins.templates ('jflickrfeed'), loader=plugin_loader)
+                #     ]
+                # )
                 include_sidebar ()
             ],
 
-            div (id_="footer") [
+            div (id="footer") [
                 p [ 'Copyright ', E.copy, ' 2011, %(blog_author)s. All rights reserved.' % config]
             ]
         ]

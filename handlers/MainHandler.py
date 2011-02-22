@@ -1,3 +1,4 @@
+import logging
 import tornado
 from tornado.options import options
 from handlers.BaseHandler import BaseHandler, Template, Aggregator
@@ -8,6 +9,8 @@ class PageHandler (BaseHandler):
         def render (values):
             t = Template ()
             values ['current_page'] = page
+            if options.debug:
+                logging.info ('rendering %s' % (page or '/'))
             self.write (t.render (options.index, vars=values))
             self.finish ()
 
