@@ -3,5 +3,5 @@
 
 depends   = ['article']
 css       = ['search.css']
-templates = ['search']
+templates = ['template']
 views     = []

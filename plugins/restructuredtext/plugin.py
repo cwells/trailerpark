@@ -1,7 +1,6 @@
 '''Enables restructuredText as well as source code colorizing via pygments
 '''
 
-target    = None
 css       = ['pygments.css', 'rest.css']
 macros    = []
 templates = []

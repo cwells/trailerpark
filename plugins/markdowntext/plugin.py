@@ -1,7 +1,6 @@
 '''Enables markdown as well as source code colorizing via pygments
 '''
 
-target    = None
 css       = ['pygments.css', 'style.css']
 macros    = []
 templates = []

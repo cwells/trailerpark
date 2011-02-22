@@ -8,7 +8,6 @@ settings = {
     'thumb_count': 6
 }
 
-target    = 'sidebar'
 depends   = ['jquery']
 js        = ['jflickrfeed.min.js']
 css       = ['style.css']

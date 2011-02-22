@@ -2,7 +2,6 @@ import re
 from tornado.options import options
 from datetime import datetime
 
-target    = 'content'
 url       = '.+'
 templates = ['template']
 depends   = ['blog']
