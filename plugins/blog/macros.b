@@ -13,8 +13,8 @@ macro ('include_js', lambda:
 ),
 
 # include content plugins
-macro ('include_plugins', lambda target:
-    [ [ include (_tpl, loader=plugin_loader)
+macro ('include_plugins', lambda target, wrapper=invisible:
+    [ [ wrapper () [ include (_tpl, loader=plugin_loader) ]
         for _tpl in plugins.templates (_plugin) ]
       for _plugin in plugins.index (v.current_page, target) ]
 )

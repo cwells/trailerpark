@@ -37,7 +37,7 @@ html [
             ],
             
             div (id_="sidebar") [
-                include_plugins ('sidebar')
+                include_plugins ('sidebar', wrapper=lambda: div (class_='plugin'))
             ],
 
             div (id="footer") [

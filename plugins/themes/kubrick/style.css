@@ -12,6 +12,12 @@
 */
 
 /* Begin Typography & Colors */
+#banner { 
+    padding: 0 0 20px 45px;
+    margin: 0px 0 0;
+    width: 450px;
+}
+
 .tagline, .tags { 
     font-size: 75%;
     padding: 4px 10px;
@@ -19,10 +25,6 @@
 
 .entry ul li:before, #sidebar ul li:before {
     content: "\00BB \0020";
-}
-
-#recent_articles {
-   list-style: none;
 }
 
 .description {
@@ -47,250 +49,250 @@ h1, h1 a, h1 a:hover, h1 a:visited, #headerimg .description {
 }
 
 body {
-	font-size: 62.5%; /* Resets 1em to 10px */
-	font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	background-color: #d5d6d7;
-	color: #333;
-	}
+    font-size: 62.5%; /* Resets 1em to 10px */
+    font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    background-color: #d5d6d7;
+    color: #333;
+}
 
 #page {
-	background-color: white;
-	border: 1px solid #959596;
-	text-align: left;
-	}
+    background-color: white;
+    border: 1px solid #959596;
+    text-align: left;
+}
 
 #header {
-	background-color: #73a0c5;
-	}
+    background-color: #73a0c5;
+}
 
 #content {
-	font-size: 1.2em
-	}
+    font-size: 1.2em
+}
 
 .narrowcolumn .entry {
-	line-height: 1.4em;
-	}
+    line-height: 1.4em;
+}
 	
 .narrowcolumn .postmetadata {
-	text-align: center;
-	}
+    text-align: center;
+}
 
 .graybox {
-	background-color: #f8f8f8;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	margin: 0;
-	padding: 10px;
-	}
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 0;
+    padding: 10px;
+}
 
 
 #footer {
-	background-color: #eee;
-	}
+    background-color: #eee;
+}
 
 small {
-	font-family: Arial, Helvetica, Sans-Serif;
-	font-size: 0.9em;
-	line-height: 1.5em;
-	}
+    font-family: Arial, Helvetica, Sans-Serif;
+    font-size: 0.9em;
+    line-height: 1.5em;
+}
 
 h1, h2, h3 {
-	font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	font-weight: bold;
-	}
+    font-family: 'Trebuchet MS', 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    font-weight: bold;
+}
 
 h1 {
-	font-size: 4em;
-	text-align: center;
-	}
+    font-size: 4em;
+    text-align: center;
+}
 
 h2 {
-	font-size: 1.6em;
-	}
-	
+    font-size: 1.6em;
+}
+
 .box h2 {
-	font-size: 1.4em;
+    font-size: 1.4em;
 }
 
 h2.pagetitle {
-	font-size: 1.6em;
-	}
+    font-size: 1.6em;
+}
 
 #sidebar h2 {
-	font-family: 'Lucida Grande', Verdana, Sans-Serif;
-	font-size: 1.2em;
-	}
+    font-family: 'Lucida Grande', Verdana, Sans-Serif;
+    font-size: 1.2em;
+}
 
 h3 {
-	font-size: 1.3em;
-	}
+    font-size: 1.3em;
+}
 
 h1, h1 a, h1 a:hover, h1 a:visited {
-	text-decoration: none;
-	color: white;
-	}
+    text-decoration: none;
+    color: white;
+}
 
 h2, h2 a, h2 a:visited, h3, h3 a, h3 a:visited {
-	color: #333;
-	}
+    color: #333;
+}
 
 h2, h2 a, h2 a:hover, h2 a:visited, h3, h3 a, h3 a:hover, h3 a:visited, #sidebar h2, #wp-calendar caption, cite {
-	text-decoration: none;
-	}
+    text-decoration: none;
+}
 
 .entry p a:visited {
-	color: #b85b5a;
-	}
+    color: #b85b5a;
+}
 
 #sidebar {
-	font: 1em 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	}
+    font: 1em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+}
 
 small, #sidebar ul ul li, #sidebar ul ol li, .nocomments, .postmetadata, blockquote, strike {
-	color: #777;
-	}
-	
+    color: #777;
+}
+
 code {
-	font: 1.1em 'Courier New', Courier, Fixed;
-	}
+    font: 1.1em 'Courier New', Courier, Fixed;
+}
 
 acronym, abbr, span.caps
 {
-	font-size: 0.9em;
-	letter-spacing: .07em;
-	}
+    font-size: 0.9em;
+    letter-spacing: .07em;
+}
 
 a, h2 a:hover, h3 a:hover {
-	color: #06c;
-	text-decoration: none;
-	}
+    color: #06c;
+    text-decoration: none;
+}
 
 a:hover {
-	color: #147;
-	text-decoration: underline;
-	}
-	
+    color: #147;
+    text-decoration: underline;
+}
+
 .calendar table {
-	font-size: small;
+    font-size: small;
 }
 
 .calendar a {
-	text-decoration: none;
-	}
+    text-decoration: none;
+}
 
 .calendar caption {
-	font: bold small 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	text-align: center;
-	}
+    font: bold small 'Lucida Grande', Verdana, Arial, Sans-Serif;
+    text-align: center;
+}
 .calendar caption a {
-	display: inline;
+    display: inline;
 }
 
 .calendar th {
-	font-style: normal;
-	text-transform: capitalize;
-	}
+    font-style: normal;
+    text-transform: capitalize;
+}
 /* End Typography & Colors */
 
 
 /* Begin Structure */
 body {
-	margin: 0;
-	padding: 0; 
-	}
+    margin: 0;
+    padding: 0; 
+}
 
 #page {
-	background-color: white;
-	margin: 20px auto;
-	padding: 0;
-	width: 760px;
-	border: 1px solid #959596;
-	}
-	
+    background-color: white;
+    margin: 20px auto;
+    padding: 0;
+    width: 760px;
+    border: 1px solid #959596;
+}
+
 #header {
-	padding: 0;
-	margin: 0 auto;
-	height: 200px;
-	width: 100%;
-	background-color: #73a0c5;
-	}
+    padding: 0;
+    margin: 0 auto;
+    height: 200px;
+    width: 100%;
+    background-color: #73a0c5;
+}
 
 #headerimg {
-	margin: 0;
-	height: 200px;
-	width: 100%;
-	}
+    margin: 0;
+    height: 200px;
+    width: 100%;
+}
 
 .narrowcolumn {
-	float: left;
-	padding: 0 0 20px 45px;
-	margin: 0px 0 0;
-	width: 450px;
-	}
-	
+    float: left;
+    padding: 0 0 20px 45px;
+    margin: 0px 0 0;
+    width: 450px;
+}
+
 .node {
-	margin: 0 0 40px;
-	}
+    margin: 0 0 40px;
+}
 
 .narrowcolumn .postmetadata {
-	padding-top: 5px;
-	}
-	
+    padding-top: 5px;
+}
+
 #footer {
-	padding: 20px 0;
-	margin: 0 auto;
-	margin-left: 0px; 
-	width: 760px;
-	clear: both;
-	}
+    padding: 20px 0;
+    margin: 0 auto;
+    margin-left: 0px; 
+    width: 760px;
+    clear: both;
+}
 
 #footer p {
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	}
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
 /* End Structure */
 
 
 
 /*	Begin Headers */
 h1 {
-	padding-top: 70px;
-	margin: 0;
-	}
+    padding-top: 70px;
+    margin: 0;
+}
 
 h2 {
-	margin: 30px 0 0;
-	}
+    margin: 30px 0 0;
+}
 
 h2.pagetitle {
-	margin-top: 30px;
-	text-align: center;
+    margin-top: 30px;
+    text-align: center;
 }
 
 #sidebar h2 {
-	margin: 5px 0 0;
-	padding: 0;
-	}
+    margin: 5px 0 0;
+    padding: 0;
+}
 
 h3 {
-	padding: 0;
-	margin: 30px 0 0;
-	}
+    padding: 0;
+    margin: 30px 0 0;
+}
 
 h3.comments {
-	padding: 0;
-	margin: 40px auto 20px ;
-	}
+    padding: 0;
+    margin: 40px auto 20px ;
+}
 /* End Headers */
 
 
 
 /* Begin Images */
 p img {
-	padding: 0;
-	max-width: 100%;
-	}
+    padding: 0;
+    max-width: 100%;
+}
 
 /*	Using 'class="alignright"' on an image will (who would've
 	thought?!) align the image to the right. And using 'class="centered',
@@ -298,30 +300,30 @@ p img {
 	align="center", being much more futureproof (and valid) */
 	
 img.centered {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	}
-	
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 img.alignright {
-	padding: 4px;
-	margin: 0 0 2px 7px;
-	display: inline;
-	}
+    padding: 4px;
+    margin: 0 0 2px 7px;
+    display: inline;
+}
 
 img.alignleft {
-	padding: 4px;
-	margin: 0 7px 2px 0;
-	display: inline;
-	}
+    padding: 4px;
+    margin: 0 7px 2px 0;
+    display: inline;
+}
 
 .alignright {
-	float: right;
-	}
-	
+    float: right;
+}
+
 .alignleft {
-	float: left
-	}
+    float: left
+}
 /* End Images */
 
 
@@ -332,132 +334,132 @@ img.alignleft {
 	Do not work in Internet Explorer, which merely default to normal bullets. */
 
 html>body .entry ul {
-	margin-left: 0px;
-	padding: 0 0 0 30px;
-	list-style: none;
-	padding-left: 10px;
-	text-indent: -10px;
-	} 
+    margin-left: 0px;
+    padding: 0 0 0 30px;
+    list-style: none;
+    padding-left: 10px;
+    text-indent: -10px;
+} 
 
 html>body .entry li {
-	margin: 7px 0 8px 10px;
-	}
+    margin: 7px 0 8px 10px;
+}
 
 .entry ul li:before {
-	content: "\00BB \0020";
-	}
+    content: "\00BB \0020";
+}
 
 .entry ol {
-	padding: 0 0 0 35px;
-	margin: 0;
-	}
+    padding: 0 0 0 35px;
+    margin: 0;
+}
 
 .entry ol li {
-	margin: 0;
-	padding: 0;
-	}
+    margin: 0;
+    padding: 0;
+}
 dl dt {
-	font-weight: bolder;
+    font-weight: bolder;
 }
 .postmetadata ul, .postmetadata li {
-	display: inline;
-	list-style-type: none;
-	list-style-image: none;
-	}
-	
+    display: inline;
+    list-style-type: none;
+    list-style-image: none;
+}
+
 #sidebar ul, #sidebar ul ol {
-	margin: 0;
-	padding: 0;
-	}
+    margin: 0;
+    padding: 0;
+}
 #sidebar .item-list ul li {
-	list-style: none;
+    list-style: none;
 }
 
 #sidebar .block {
-	list-style-type: none;
-	list-style-image: none;
-	margin-bottom: 15px;
-	}
+    list-style-type: none;
+    list-style-image: none;
+    margin-bottom: 15px;
+}
 
 #sidebar .block p {
-	margin: 5px 0 8px;
-	}
+    margin: 5px 0 8px;
+}
 
 #sidebar .block ul, #sidebar .block ol {
-	margin: 5px 0 0 10px;
-	}
+    margin: 5px 0 0 10px;
+}
 
 #sidebar .block ul ul, #sidebar .block ol {
-	margin: 0 0 0 10px;
-	}
+    margin: 0 0 0 10px;
+}
 
 ol li, #sidebar .block ol li {
-	list-style: decimal outside;
-	}
+    list-style: decimal outside;
+}
 
 #sidebar .block ul li, #sidebar .block ol li {
-	margin: 3px 0 0;
-	padding: 0;
-	}
+    margin: 3px 0 0;
+    padding: 0;
+}
 /* End Entry Lists */
 
 #sidebar .block-user .menu ul li:before {
-	content: "";
-	}
+    content: "";
+}
 
 /* Begin Form Elements */
 
 .form-item input.form-text,
 .form-item textarea.textarea {
-	width: 100%;
-	padding: 0;
+    width: 100%;
+    padding: 0;
 }
 .form-item select {
-	width: auto;
+    width: auto;
 }
 .box .form-item select {
-	font-size: 0.8em;
+    font-size: 0.8em;
 }
 .user-login-block .form-item input {
-	width: auto;
+    width: auto;
 }
 
 #searchform {
-	margin: 10px auto;
-	padding: 5px 3px; 
-	text-align: center;
-	}
+    margin: 10px auto;
+    padding: 5px 3px; 
+    text-align: center;
+}
 
 #searchform #s {
-	width: 100px;
-	padding: 2px;
-	margin: 0;
-	}
+    width: 100px;
+    padding: 2px;
+    margin: 0;
+}
 
 #searchform #searchsubmit {
-	padding: 1px;
-	margin: 0;
-	}
+    padding: 1px;
+    margin: 0;
+}
 
 /* End Form Elements */
 
 
 /* Begin Comments*/
 .comment {
-	background-color: #f8f8f8;
-	border-top: 1px solid #ddd;
-	border-bottom: 1px solid #ddd;
-	margin: 15px 0 3px;
-	padding: 5px 10px 3px;
-	padding: 10px;
-	font: 0.9em 'Lucida Grande', Verdana, Arial, Sans-Serif;
-	}
+    background-color: #f8f8f8;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 15px 0 3px;
+    padding: 5px 10px 3px;
+    padding: 10px;
+    font: 0.9em 'Lucida Grande', Verdana, Arial, Sans-Serif;
+}
 .comment cite {
-	font-style: normal;
-	font-weight: bolder;
+    font-style: normal;
+    font-weight: bolder;
 }
 .comment cite a {
-	font-size: 1.1em;
+    font-size: 1.1em;
 }
 
 
@@ -466,145 +468,145 @@ ol li, #sidebar .block ol li {
 
 
 /* Begin Sidebar */
-#sidebar
-{
-	padding: 20px 0 10px 0;
-	margin-left: 545px;
-	width: 190px;
-	}
+#sidebar {
+    padding: 20px 0 10px 0;
+    margin-left: 545px;
+    width: 190px;
+}
 
 #sidebar form {
-	margin: 0;
-	}
+    margin: 0;
+}
 /* End Sidebar */
 
 
 
 /* Begin Calendar */
 .calendar table {
-	empty-cells: show;
-	margin: 10px auto 0;
-	width: 155px;
-	}
+    empty-cells: show;
+    margin: 10px auto 0;
+    width: 155px;
+}
 
 .calendar a {
-	display: block;
-	}
+    display: block;
+}
 
 .calendar caption {
-	text-align: center;
-	width: 100%;
-	margin-top: 1em;
-	}
+    text-align: center;
+    width: 100%;
+    margin-top: 1em;
+}
 
 .calendar td, .calendar th {
-	padding: 3px 0;
-	text-align: center;
-	border: none;
-	}
+    padding: 3px 0;
+    text-align: center;
+    border: none;
+}
 
 .calendar td.pad:hover { /* Doesn't work in IE */
-	background-color: #fff; }
+    background-color: #fff; 
+}
 /* End Calendar */
 
 
 
 /* Begin Various Tags & Classes */
 acronym, abbr, span.caps {
-	cursor: help;
-	}
+    cursor: help;
+}
 
 acronym, abbr {
-	border-bottom: 1px dashed #999;
-	}
+    border-bottom: 1px dashed #999;
+}
 
 blockquote {
-	margin: 15px 30px 0 10px;
-	padding-left: 20px;
-	border-left: 5px solid #ddd;
-	}
+    margin: 15px 30px 0 10px;
+    padding-left: 20px;
+    border-left: 5px solid #ddd;
+}
 
 blockquote cite {
-	margin: 5px 0 0;
-	display: block;
-	}
+    margin: 5px 0 0;
+    display: block;
+}
 
 .center {
-	text-align: center;
-	}
+    text-align: center;
+}
 
 hr {
-	display: none;
-	}
+    display: none;
+}
 
 a img {
-	border: none;
-	}
+    border: none;
+}
 
 .navigation {
-	float: right;
-	margin-top: 2em;
-	}
+    float: right;
+    margin-top: 2em;
+}
 /* End Various Tags & Classes*/
 
 /* Drupal Elements */
 
 .messages, #mission {
-	margin: 3em 0 3em 0;
+    margin: 3em 0 3em 0;
 }
 
 #primarylink {
-	display: block;
-	margin: -15px 0 0 0;
-	padding: 0;
-	text-align: center;
-	font-weight: bolder;
+    display: block;
+    margin: -15px 0 0 0;
+    padding: 0;
+    text-align: center;
+    font-weight: bolder;
 }
 #primarylink li {
-	list-style: none;
-	display: inline;
-	margin: 0 1em;
+    list-style: none;
+    display: inline;
+    margin: 0 1em;
 }
 #primarylink li a {
-	color: white;
+    color: white;
 }
 #primarylink .active {
-	border-bottom: 4px solid white;
+    border-bottom: 4px solid white;
 }
 #primarylink :hover {
-	text-decoration: none;
+    text-decoration: none;
 }
 
 table {
-	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
-	font-size: 0.75em;
-	letter-spacing: -0.1em;
+    font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 0.75em;
+    letter-spacing: -0.1em;
 }
 th { letter-spacing: normal ! important; }
 table strong { letter-spacing: normal ! important; }
 .node table {
-	font-size: 1em;
-	letter-spacing: normal;
+    font-size: 1em;
+    letter-spacing: normal;
 }
-	
+
 /* Images */
-	body	 	{ background: url(images/kubrickbgcolor.jpg); }
-	#page		{ background: url(images/kubrickbg.jpg) repeat-y top; border: none; }
-	#header 	{ background: url(images/kubrickheader.jpg) no-repeat bottom center; }
-	#footer 	{ background: url(images/kubrickfooter.jpg) no-repeat bottom; border: none;}
-			
-			
+body	 	{ background: url(images/kubrickbgcolor.jpg); }
+#page		{ background: url(images/kubrickbg.jpg) repeat-y top; border: none; }
+#header 	{ background: url(images/kubrickheader.jpg) no-repeat bottom center; }
+#footer 	{ background: url(images/kubrickfooter.jpg) no-repeat bottom; border: none;}
+
+
 /*	Because the template is slightly different, size-wise, with images, this needs to be set here
 	If you don't want to use the template's images, you can also delete the following two lines. */
-			
-	#header 	{ margin: 0 !important; margin: 0 0 0 0px; padding: 1px; height: 198px; width: 758px; }
-	#headerimg 	{ margin: 7px 9px 0; height: 192px; width: 740px; } 
+
+#header 	{ margin: 0 !important; margin: 0 0 0 0px; padding: 1px; height: 198px; width: 758px; }
+#headerimg 	{ margin: 7px 9px 0; height: 192px; width: 740px; } 
 /* END IMAGE CSS */
-		
+
 
 /* 	To ease the insertion of a personal header image, I have done it in such a way,
-		that you simply drop in an image called 'personalheader.jpg' into your /images/
-		directory. Dimensions should be at least 760px x 200px. Anything above that will
-		get cropped off of the image. */
-		
+	that you simply drop in an image called 'personalheader.jpg' into your /images/
+	directory. Dimensions should be at least 760px x 200px. Anything above that will
+	get cropped off of the image. */
+
 /*	#headerimg 	{ background: url(images/personalheader.jpg) no-repeat top;} */		
