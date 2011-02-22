@@ -28,25 +28,16 @@ html [
                 ]
             ],
 
+            div (id_="banner") [
+                include_plugins ('banner')
+            ],
+
             div (id_="content", class_="narrowcolumn") [
-                include_content ()
+                include_plugins ('content')
             ],
             
             div (id_="sidebar") [
-                # plugins.has ('recent_articles') and (
-                #     div (class_='plugin') [
-                #         h2 [ "Recent Articles" ],
-                #         include (plugins.templates ('recent_articles'), loader=plugin_loader)
-                #     ]
-                # ),
-
-                # plugins.has ('jflickrfeed') and (
-                #     div (class_='plugin') [
-                #         h2 [ "Flickr" ],
-                #         include (plugins.templates ('jflickrfeed'), loader=plugin_loader)
-                #     ]
-                # )
-                include_sidebar ()
+                include_plugins ('sidebar')
             ],
 
             div (id="footer") [

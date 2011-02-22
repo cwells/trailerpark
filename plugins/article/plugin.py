@@ -38,8 +38,8 @@ install  = {
             "tags": "",
             "thumb": "",
             "category": "",
-            "featured": True,
-            "featured_image": "",
+            # "featured": True,
+            # "featured_image": "",
             "summary": "Welcome to PostBlog!",
             "published": True 
         })

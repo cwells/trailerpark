@@ -12,17 +12,19 @@ macro ('show_featured', lambda _i, _feature:
     ]     
 ),
 
-div (id="featured") [
-    div (class_="featured_thumb") [
-        div (class_="b") [
-            ul (class_="featured_photo") [
-                [ show_featured_photo (_i, _f ['value']) 
-                  for _i, _f in enumerate (v.featured_articles ['rows']) ]
-            ],
-            ul (class_="featured_text") [
-                [ show_featured (_i, _f ['value']) 
-                  for _i, _f in enumerate (v.featured_articles ['rows']) ],
+( # only renders if there are docs returned flagged 'featured'
+    div (id="featured") [
+        div (class_="featured_thumb") [
+            div (class_="featured_content") [
+                ul (class_="featured_photo") [
+                    [ show_featured_photo (_i, _f ['value']) 
+                      for _i, _f in enumerate (v.featured_articles ['rows']) ]
+                ],
+                ul (class_="featured_text") [
+                    [ show_featured (_i, _f ['value']) 
+                      for _i, _f in enumerate (v.featured_articles ['rows']) ]
+                ]
             ]
-        ]
-    ]
-]
+        ] 
+    ] 
+) if 'rows' in v.featured_articles else ''
