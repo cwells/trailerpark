@@ -43,6 +43,11 @@ install  = {
             # "featured_image": "",
             "summary": "Welcome to Trailerpark!",
             "published": True 
-        })
+        }),
+        { 
+            "_id": "404",
+            "title": "This probably isn't what you were looking for.",
+            "content": ".. format: rst\n\n.. image:: /images/404.png\n   :align: center\n"
+        }
     ]
 }

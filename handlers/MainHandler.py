@@ -9,6 +9,8 @@ class RequestHandler (BaseHandler):
         if self._args: # we hit the catch-all
             action = self._args.get ('action', action)
             page = self._args.get ('page', page)
+            if 'status' in self._args:
+                self.set_status (self._args ['status'])
             
         pageinfo = {
             'action': action,
@@ -17,12 +19,12 @@ class RequestHandler (BaseHandler):
 
         def render (values):
             if isinstance (values.get ('article', None), Exception):
-                self.set_status (404)
+                self.set_status (values ['article'].code)
                 
             if options.debug:
                 for k, v in values.items ():
                     if isinstance (v, Exception):
-                        logging.error ('Failed to load document(s) for "%s"' % k)
+                        logging.error ('Failed to load document(s) for "%s": "%s"' % (k, v))
                 
             t = Template ()
             values ['_pageinfo'] = pageinfo

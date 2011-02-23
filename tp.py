@@ -44,7 +44,7 @@ class Application (tornado.web.Application):
             (r"^/",                 RequestHandler), # /
             (r"^/(view|edit)/?",    RequestHandler), # /action, /action/
             (r"^/(view|edit)/(.+)", RequestHandler), # /action/some-article
-            (r".*",                 RequestHandler,  {'action': 'view', 'page': '404'})
+            (r".*",                 RequestHandler,  {'action': 'view', 'page': '404', 'status': 404})
         ]
 
         settings = dict (
