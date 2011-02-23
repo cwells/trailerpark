@@ -13,18 +13,31 @@
 
 /* Begin Typography & Colors */
 #banner { 
-    padding: 0 0 20px 45px;
-    margin: 0px 0 0;
-    width: 450px;
+    padding: 10px 23px;
+    margin: 0;
+    /*width: 712px;
+    height: 215px;*/
+}
+
+/* featured-article plugin */
+#featured { 
+    width: 355px; 
+    height: 250px; 
+    padding-right: 350px; 
+    position: relative; 
+    background: #fff;
+}
+#featured ul.ui-tabs-nav { 
+    position: absolute; 
+    top: 0; left: 400px; 
+    list-style: none; 
+    padding: 0; margin: 0; 
+    width: 305px; 
 }
 
 .tagline, .tags { 
     font-size: 75%;
     padding: 4px 10px;
-}
-
-.entry ul li:before, #sidebar ul li:before {
-    content: "\00BB \0020";
 }
 
 .description {
@@ -40,6 +53,9 @@
 }
 #sidebar .plugin ul { 
     list-style: none; 
+}
+#sidebar .plugin ul li:before {
+    content: "\00BB \0020";
 }
 
 h3 { font-size:1.3em; }

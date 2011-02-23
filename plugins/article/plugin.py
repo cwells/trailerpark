@@ -3,6 +3,7 @@ from tornado.options import options
 from datetime import datetime
 
 url       = '.+'
+action    = 'view'
 templates = ['template']
 depends   = ['blog']
 
@@ -40,7 +41,7 @@ install  = {
             "category": "",
             # "featured": True,
             # "featured_image": "",
-            "summary": "Welcome to PostBlog!",
+            "summary": "Welcome to Trailerpark!",
             "published": True 
         })
     ]

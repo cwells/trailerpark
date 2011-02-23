@@ -10,15 +10,15 @@ from libs.couch import BlockingCouch as CouchDB
 api = {
     'depends':   list,            # list of plugins this plugin depends on
     'provides':  str,             # use this name in dependency resolution rather than plugin name
-    'target':    lambda: None,    # where plugin is to be rendered
     'url':       lambda: '.*',    # regex of urls plugin is to be rendered on
+    'action':    lambda: '.*',    # regex of actions to render on (currently view, edit)
     'css':       list,            # css resources
     'js':        list,            # javascript resources
-    'index':     lambda: 'index', # primary template to render
     'templates': list,            # template resources
     'views':     list,            # couchdb views needed at render time
     'macros':    list,            # macros to be made globally available
     'install':   dict,            # resources to be created during --install. currently: views, docs are supported
+    'index':     lambda: 'index', # primary template to render (for themes only)
 }
 
 class Plugins (object):
@@ -167,46 +167,53 @@ class Plugins (object):
             doc ['views'].update (vdefs)
             couchdb.save_doc (doc)
 
-    def index (self, url, target=None):
+    def index (self, pageinfo, target=None):
         '''return a list of plugins for a named target
         '''
         for p, t in options.plugins: # retain order
             plugin = self._plugins [p]
             if target is None or plugin.target == target:
-                if plugin.url is None or re.match (plugin.url, url):
-                    yield p
+                if re.match (plugin.url, pageinfo ['page']):
+                    if re.match (plugin.action, pageinfo ['action']):
+                        yield p
 
     # public API
     def has (self, plugin):
-        '''similar to dict.get() except the 
-        default is hard-coded to be an empty string 
-        to make it invisible in templates.
+        '''check if a plugin is provided
         '''
-        return self._plugins.get (plugin, '')
+        for p, m in self._plugins.items ():
+            if plugin in (p, m.provides):
+                return m
+        return ''
+
+    def dir (self, plugin, path=''):
+        '''return the path of the active plugin
+        '''
+        return '/plugins/%s/%s' % (plugin, path)
 
     def css (self, plugin):
         '''return the css resources for a plugin
         '''
-        return [ '/plugins/%s/%s' % (plugin, css) 
-                 for css in self._plugins [plugin].css]
+        return ['/plugins/%s/%s' % (plugin, css) 
+                for css in self._plugins [plugin].css]
 
     def js (self, plugin):
         '''return the javascript resources for a plugin
         '''
-        return [ '/plugins/%s/%s' % (plugin, js) 
-                 for js in self._plugins [plugin].js]
+        return ['/plugins/%s/%s' % (plugin, js) 
+                for js in self._plugins [plugin].js]
 
     def templates (self, plugin):
         '''return the template resources for a plugin
         '''
-        return [ 'plugins/%s/%s' % (plugin, tpl) 
-                 for tpl in self._plugins [plugin].templates]
+        return ['plugins/%s/%s' % (plugin, tpl) 
+                for tpl in self._plugins [plugin].templates]
 
     def macros (self, plugin):
         '''return the macro resources for a plugin
         '''
-        return [ 'plugins/%s/%s' % (plugin, macro) 
-                 for macro in self._plugins [plugin].macros]
+        return ['plugins/%s/%s' % (plugin, macro) 
+                for macro in self._plugins [plugin].macros]
 
 
 class PluginTemplateLoader (object):

@@ -3,19 +3,37 @@ import tornado
 from tornado.options import options
 from handlers.BaseHandler import BaseHandler, Template, Aggregator
 
-class PageHandler (BaseHandler):
+class RequestHandler (BaseHandler):
     @tornado.web.asynchronous
-    def get (self, page=''):
+    def get (self, action='view', page=''):
+        if self._args: # we hit the catch-all
+            action = self._args.get ('action', action)
+            page = self._args.get ('page', page)
+            
+        pageinfo = {
+            'action': action,
+            'page':   page
+        }
+
         def render (values):
+            if isinstance (values.get ('article', None), Exception):
+                self.set_status (404)
+                
+            if options.debug:
+                for k, v in values.items ():
+                    if isinstance (v, Exception):
+                        logging.error ('Failed to load document(s) for "%s"' % k)
+                
             t = Template ()
-            values ['current_page'] = page
-            # if options.debug:
-            #    logging.info ('rendering %s' % (page or '/'))
+            values ['_pageinfo'] = pageinfo
             self.write (t.render (options.index, vars=values))
             self.finish ()
 
+        if options.debug:
+            logging.info ('GET: action: %s, page: %s' % (action, page))
+
         views = []
-        for p in self.plugins.index (page):
+        for p in self.plugins.index (pageinfo):
             views.extend (self.plugins[p].views)
         views = set (views)
         ag = Aggregator (render, list (views))
@@ -26,5 +44,33 @@ class PageHandler (BaseHandler):
 
         for view in views:
             self.couchdb.view (options.couch_design, view, lambda values, view=view: ag (view, values), limit=5)
+    
 
+    @tornado.web.asynchronous
+    def head (self, action='view', page=''):
+        if self._args: # we hit the catch-all
+            action = self._args.get ('action', action)
+            page = self._args.get ('page', page)
 
+        pageinfo = {
+            'action': action,
+            'page':   page
+        }
+
+        def render (values):
+            if isinstance (values.get ('article', None), Exception):
+                self.set_status (404)
+
+            self.write ('') # HEAD shouldn't return a body
+            self.finish ()
+
+        if options.debug:
+            logging.info ('HEAD: action: %s, page: %s' % (action, page))
+
+        views = []
+        ag = Aggregator (render, views)
+
+        if page:
+            ag += 'article'
+            self.couchdb.get_doc (page, lambda values: ag ('article', values))
+        

@@ -57,7 +57,7 @@ class Aggregator (object):
         self.values = { }
 
     def __call__ (self, which, values):
-        self.values [which] = values
+        self.values [which] = values # values might be Exception object
         if set (self.required) == set (self.values.keys ()):
             self.finish (self.values)
 
@@ -70,5 +70,7 @@ class BaseHandler (tornado.web.RequestHandler):
     couchdb = CouchDB (options.couch_db, options.couch_host, options.couch_port)
     plugins = plugins
 
+    def initialize (self, *args, **kw):
+        self._args = kw
 
         

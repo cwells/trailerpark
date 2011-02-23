@@ -35,14 +35,16 @@ tornado.options.parse_config_file (options.config)
 tornado.options.parse_command_line ()
 options.cookie_secret = b64encode (options.secret)
 
-from handlers.MainHandler import PageHandler
+from handlers.MainHandler import RequestHandler
 
 
 class Application (tornado.web.Application):
     def __init__ (self):
         handlers = [
-            (r"/",     PageHandler),
-            (r"/(.+)", PageHandler),
+            (r"^/",                 RequestHandler), # /
+            (r"^/(view|edit)/?",    RequestHandler), # /action, /action/
+            (r"^/(view|edit)/(.+)", RequestHandler), # /action/some-article
+            (r".*",                 RequestHandler,  {'action': 'view', 'page': '404'})
         ]
 
         settings = dict (

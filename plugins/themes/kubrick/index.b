@@ -1,17 +1,13 @@
 # include global macros.  this is required.
 [ include (plugins.macros (_plugin), loader=plugin_loader) 
-  for _plugin in plugins.index (v.current_page) ],
+  for _plugin in plugins.index (v._pageinfo) ],
 
 html [
     head [
         title [ config ['blog_title'] ],
         
         include_css (),
-        include_js (),
-
-        style (type="text/css") [ '''
-            #logo { margin: 0; padding: 0; }
-        ''' ]
+        include_js ()
     ],
     
     body [
@@ -28,9 +24,10 @@ html [
                 ]
             ],
 
-            div (id_="banner") [
-                include_plugins ('banner')
-            ],
+            plugins.has ('featured') and 
+                div (id_="banner") [
+                    include_plugins ('banner')
+                ],
 
             div (id_="content", class_="narrowcolumn") [
                 include_plugins ('content')
@@ -41,7 +38,7 @@ html [
             ],
 
             div (id="footer") [
-                p [ 'Copyright ', E.copy, ' 2011, %(blog_author)s. All rights reserved.' % config]
+                p [ 'Copyright ', E.copy, ' 2011, %(blog_author)s. All rights reserved.' % config ]
             ]
         ]
     ]

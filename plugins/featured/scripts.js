@@ -8,7 +8,7 @@ function textSlideIn (proj) {
     $('ul.featured_text').children ('li:eq(' + proj + ')').animate ({ right: "-1px" }, 700);
 }
 function textSlideOut (proj) {
-    $('ul.featured_text').children ('li:eq(' + proj + ')').animate ({ right: "-270px" }, 700);
+    $('ul.featured_text').children ('li:eq(' + proj + ')').animate ({ right: "-50%" }, 700);
 }
 function photoFadeIn (proj) {
     $('ul.featured_photo').children ('li:eq(' + proj + ')').fadeIn (700);

@@ -1,6 +1,7 @@
 '''A plugin to display featured posts using a slideshow.
 '''
 
+provides  = 'featured'
 depends   = ['jquery', 'article']
 css       = ['plugin.css']
 js        = ['scripts.js']
