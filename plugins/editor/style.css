@@ -23,15 +23,3 @@
   padding: 5px;
   margin: 0;
 }
-#editor form fieldset fieldset {
-  border: none;
-  margin: 3px 0 0;
-}
-#editor form fieldset fieldset legend {
-  padding: 0 0 5px;
-  font-weight: normal;
-}
-#editor form fieldset fieldset label {
-  display: block;
-  width: auto;
-}
