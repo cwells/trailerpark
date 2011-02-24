@@ -5,16 +5,16 @@ from handlers.BaseHandler import BaseHandler, Template, Aggregator
 
 class RequestHandler (BaseHandler):
     @tornado.web.asynchronous
-    def get (self, action='view', page=''):
+    def get (self, action='view/article', doc=''):
         if self._args: # we hit the catch-all
             action = self._args.get ('action', action)
-            page = self._args.get ('page', page)
+            doc = self._args.get ('doc', doc)
             if 'status' in self._args:
                 self.set_status (self._args ['status'])
             
         pageinfo = {
             'action': action,
-            'page':   page
+            'doc':    doc
         }
 
         def render (values):
@@ -32,7 +32,7 @@ class RequestHandler (BaseHandler):
             self.finish ()
 
         if options.debug:
-            logging.info ('GET: action: %s, page: %s' % (action, page))
+            logging.info ('GET: action: %s, doc: %s' % (action, doc))
 
         views = []
         for p in self.plugins.index (pageinfo):
@@ -40,23 +40,23 @@ class RequestHandler (BaseHandler):
         views = set (views)
         ag = Aggregator (render, list (views))
 
-        if page:
+        if doc:
             ag += 'article'
-            self.couchdb.get_doc (page, lambda values: ag ('article', values))
+            self.couchdb.get_doc (doc, lambda values: ag ('article', values))
 
         for view in views:
             self.couchdb.view (options.couch_design, view, lambda values, view=view: ag (view, values), limit=5)
     
 
     @tornado.web.asynchronous
-    def head (self, action='view', page=''):
+    def head (self, action='view/article', doc=''):
         if self._args: # we hit the catch-all
             action = self._args.get ('action', action)
-            page = self._args.get ('page', page)
+            doc = self._args.get ('doc', doc)
 
         pageinfo = {
             'action': action,
-            'page':   page
+            'doc':   doc
         }
 
         def render (values):
@@ -67,12 +67,12 @@ class RequestHandler (BaseHandler):
             self.finish ()
 
         if options.debug:
-            logging.info ('HEAD: action: %s, page: %s' % (action, page))
+            logging.info ('HEAD: action: %s, doc: %s' % (action, doc))
 
         views = []
         ag = Aggregator (render, views)
 
-        if page:
+        if doc:
             ag += 'article'
-            self.couchdb.get_doc (page, lambda values: ag ('article', values))
+            self.couchdb.get_doc (doc, lambda values: ag ('article', values))
         

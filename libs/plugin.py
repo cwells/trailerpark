@@ -11,7 +11,7 @@ api = {
     'depends':   list,            # list of plugins this plugin depends on
     'provides':  str,             # use this name in dependency resolution rather than plugin name
     'url':       lambda: '.*',    # regex of urls plugin is to be rendered on
-    'action':    lambda: '.*',    # regex of actions to render on (currently view, edit)
+    'action':    lambda: '.*',    # regex of actions to render on (e.g. edit/article, view/comment)
     'css':       list,            # css resources
     'js':        list,            # javascript resources
     'templates': list,            # template resources
@@ -177,7 +177,7 @@ class Plugins (object):
         for p, t in options.plugins: # retain order
             plugin = self._plugins [p]
             if target is None or plugin.target == target:
-                if re.match (plugin.url, pageinfo ['page']):
+                if re.match (plugin.url, pageinfo ['doc']):
                     if re.match (plugin.action, pageinfo ['action']):
                         yield p
 

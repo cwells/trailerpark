@@ -1,6 +1,6 @@
 macro ('show_article', lambda _i, _article:
     div (class_=('post', 'first post')[_i==0]) [
-        h2 [ a (href="/view/%s" % _article ['_id']) [ _article ['title'] ] ],
+        h2 [ a (href="/view/article/%s" % _article ['_id']) [ _article ['title'] ] ],
         span (class_='tagline') [
             'posted on %(date)s in ' % _article, 
             a (href="/view/categories/%(category)s") [ '%(category)s' % _article ]

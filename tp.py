@@ -41,10 +41,10 @@ from handlers.MainHandler import RequestHandler
 class Application (tornado.web.Application):
     def __init__ (self):
         handlers = [
-            (r"^/",                 RequestHandler), # /
-            (r"^/(view|edit)/?",    RequestHandler), # /action, /action/
-            (r"^/(view|edit)/(.+)", RequestHandler), # /action/some-article
-            (r".*",                 RequestHandler,  {'action': 'view', 'page': '404', 'status': 404})
+            (r"^/",                   RequestHandler), # /
+            (r"^/([^/]+/[^/]+)/?",    RequestHandler), # e.g. view/article, edit/comment
+            (r"^/([^/]+/[^/]+)/(.+)", RequestHandler), # /action/some-article
+            (r".*",                   RequestHandler,  {'action': 'view', 'doc': '404', 'status': 404})
         ]
 
         settings = dict (

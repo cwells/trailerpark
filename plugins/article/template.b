@@ -1,5 +1,5 @@
 div (class_='post') [(
-    h2 [ a (href="/%(_id)s" % v.article) [ v.article ['title'] ] ],
+    h2 [ a (href="/view/article/%(_id)s" % v.article) [ v.article ['title'] ] ],
     p [ render_article_body (v.article ['content']) ]
 ) if not isinstance (v.article, Exception) else (
     div (style='text-align: center; width: 100%;') [ 

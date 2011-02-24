@@ -3,7 +3,7 @@ from tornado.options import options
 from datetime import datetime
 
 url       = '.+'
-action    = 'view'
+action    = 'view/article'
 templates = ['template']
 depends   = ['blog']
 
