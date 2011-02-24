@@ -4,6 +4,6 @@ div (id='editor')[
         input (type='text', name='article'),
         checkbox (name='featured'),
         checkbox (name='published'),
-        submit ()
+        button (name='submit')
     ]
 ]
