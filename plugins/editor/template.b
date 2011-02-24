@@ -5,24 +5,26 @@ div (id='editor') [
             ol [
                 li [
                     label (for_="title") [ "Title" ],
-                    input (id="title", style="width: 100%;")
+                    input (id="title", style="width: 100%;", value=v.article ['title'])
                 ],
                 li [
                     label (for_="summary") [ "Summary" ],
-                    textarea (id="summary", style="width: 100%; height: 4em;")
+                    textarea (id="summary", style="width: 100%; height: 4em;") [
+                        v.article ['summary']
+                    ]
                 ],
                 li [
                     label (for_="content") [ "Content" ],
-                    textarea (id="content", style="width: 100%; height: 30em;")
+                    textarea (id="content", style="width: 100%; height: 30em;") [ 
+                        v.article ['content'] 
+                    ]
                 ],
                 li [
-                    fieldset [
-                        legend [ "Published" ],
-                        label [ input (type="radio", name="published") [ "Yes" ] ],
-                        label [ input (type="radio", name="published") [ "No" ] ]
-                    ]
+                    label (for_='published') [ 'Published' ],
+                    checkbox (name="published", checked=v.article ['published']) 
                 ]
             ]
         ]
     ]
 ]
+

@@ -36,9 +36,3 @@
   font-style: normal;
   color: #f00;
 }
-#editor form label {
-  width: 120px; /* Width of labels */
-}
-#editor form fieldset fieldset label {
-  margin-left: 123px; /* Width plus 3 (html space) */
-}
