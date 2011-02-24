@@ -6,5 +6,5 @@ action    = 'edit'
 provides  = 'editor'
 depends   = ['article']
 templates = ['template']
-css       = []
+css       = ['style.css']
 js        = []
