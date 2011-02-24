@@ -3,8 +3,7 @@ div (class_='post') [(
     p [ render_article_body (v.article ['content']) ]
 ) if not isinstance (v.article, Exception) else (
     div (style='text-align: center; width: 100%;') [ 
-        h2 [ "You are lost." ],
-        img (src="/images/404.png", style='padding: 20px;'),
+        h2 [ "Oops." ],
         p [ str (v.article) ] 
     ]
 )]
