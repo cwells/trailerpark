@@ -53,6 +53,10 @@ class Plugins (object):
 
         self.configure_theme ()
 
+        if options.install:
+            logging.info ('Install completed!  Now restart without --install flag.')
+            raise SystemExit
+
     def load (self, plugin, target=None):
         '''import and initialize a single plugin
         '''
