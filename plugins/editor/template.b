@@ -5,11 +5,11 @@ div (id='editor') [
             ol [
                 li [
                     label (for_="title") [ "Title" ],
-                    input (id="title")
+                    input (id="title", style="width: 100%;")
                 ],
                 li [
                     label (for_="summary") [ "Summary" ],
-                    input (id="summary")
+                    textarea (id="summary", style="width: 100%; height: 4em;")
                 ],
                 li [
                     label (for_="content") [ "Content" ],
