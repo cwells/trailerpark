@@ -16,6 +16,7 @@
     display: inline-block;
     line-height: 1.8;
     vertical-align: top;
+    width: 20%;
 }
 #editor form fieldset ol {
     margin: 0;

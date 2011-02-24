@@ -1,6 +1,8 @@
 div (class_='post') [(
     h2 [ a (href="/view/article/%(_id)s" % v.article) [ v.article ['title'] ] ],
-    p [ render_article_body (v.article ['content']) ]
+    p [ render_article_body (v.article ['content']) ],
+    p [ a (href="/edit/article/%(_id)s" % v.article) ['Edit'] ]
+
 ) if not isinstance (v.article, Exception) else (
     div (style='text-align: center; width: 100%;') [ 
         h2 [ "Oops." ],

@@ -39,8 +39,7 @@ install  = {
             "tags": "",
             "thumb": "",
             "category": "",
-            # "featured": True,
-            # "featured_image": "",
+            "featured": False,
             "summary": "Welcome to Trailerpark!",
             "published": True 
         }),

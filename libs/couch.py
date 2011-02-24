@@ -1,3 +1,8 @@
+'''
+https://bitbucket.org/nephics/tornado-couchdb/src
+'''
+
+
 from tornado import httpclient
 from tornado.escape import json_decode, json_encode, url_escape
 
@@ -533,7 +538,7 @@ class AsyncCouch (object):
         
     # Basic http methods
 
-    def _http_callback (self, resp, callback, decode=True):
+    def _http_callback (self, resp, callback, decode=True, **kw): 
         if not callback:
             return
         if resp.error and not resp.body:
@@ -571,8 +576,7 @@ class AsyncCouch (object):
         r = httpclient.HTTPRequest (self.couch_url + uri, method='POST',
                                    headers=headers, body=body,
                                    use_gzip=False, **kwargs)
-        self.client.fetch (r, lambda resp: self._http_callback (resp, callback,
-                                                              doc=doc))
+        self.client.fetch (r, lambda resp: self._http_callback (resp, callback, doc=doc))
 
     def _http_put (self, uri, body, headers=None, callback=None, doc=None):
         if not isinstance (headers, dict):
@@ -583,8 +587,7 @@ class AsyncCouch (object):
             headers['Accept'] = 'application/json'
         r = httpclient.HTTPRequest (self.couch_url + uri, method='PUT',
                                    headers=headers, body=body, use_gzip=False)
-        self.client.fetch (r, lambda resp: self._http_callback (resp, callback,
-                                                              doc=doc))
+        self.client.fetch (r, lambda resp: self._http_callback (resp, callback, doc=doc))
 
     def _http_delete (self, uri, callback=None):
         r = httpclient.HTTPRequest (self.couch_url + uri, method='DELETE',

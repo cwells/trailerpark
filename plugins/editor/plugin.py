@@ -1,8 +1,8 @@
 ''' basic form for editing articles
 '''
 
-url       = 'edit/article/.+'
-# action    = 'edit'
+url       = '.+'
+action    = 'edit/article'
 provides  = 'editor'
 depends   = ['article']
 templates = ['template']

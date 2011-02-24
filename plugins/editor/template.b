@@ -1,21 +1,22 @@
 div (id='editor') [
-    form (target='') [
+    form (action='/edit/article/%(_id)s' % v.article, method='POST') [
+        input (type='hidden', name='.redirect', value='/view/article/%(_id)s' % v.article),
         fieldset [
             legend [ "Article" ],
             ol [
                 li [
                     label (for_="title") [ "Title" ],
-                    input (id="title", style="width: 100%;", value=v.article ['title'])
+                    input (type='text', name="title", style="width: 100%;", value=v.article ['title'])
                 ],
                 li [
                     label (for_="summary") [ "Summary" ],
-                    textarea (id="summary", style="width: 100%; height: 4em;") [
+                    textarea (name="summary", style="width: 100%; height: 4em;") [
                         v.article ['summary']
                     ]
                 ],
                 li [
                     label (for_="content") [ "Content" ],
-                    textarea (id="content", style="width: 100%; height: 30em;") [ 
+                    textarea (name="content", style="width: 100%; height: 30em;") [ 
                         v.article ['content'] 
                     ]
                 ],
@@ -28,8 +29,8 @@ div (id='editor') [
                     checkbox (name="featured", checked=v.article ['featured']) 
                 ],
                 li (class_='buttons') [
-                    button (name="cancel-button", value="cancel") ['Save'],
-                    button (name="save-button", value="save") ['Cancel']
+                    input (type_='submit', name=".save", value="save"),
+                    input (type_='reset', name=".reset", value="reset")
                 ]
             ]
         ]
