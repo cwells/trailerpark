@@ -22,6 +22,14 @@ div (id='editor') [
                 li [
                     label (for_='published') [ 'Published' ],
                     checkbox (name="published", checked=v.article ['published']) 
+                ],
+                li [
+                    label (for_='featured') [ 'Featured' ],
+                    checkbox (name="featured", checked=v.article ['featured']) 
+                ],
+                li (class_='buttons') [
+                    button (name="cancel-button", value="cancel") ['Save'],
+                    button (name="save-button", value="save") ['Cancel']
                 ]
             ]
         ]

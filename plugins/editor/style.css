@@ -1,25 +1,35 @@
+#editor {
+    margin: 20px 0;
+}
 #editor input, #editor textarea {
-  font-family: mono;
-  font-size: 8pt;
+    font-family: mono;
+    font-size: 8pt;
 }
 #editor form fieldset {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 #editor form legend {
-  padding: 0 2px;
-  font-weight: bold;
+    padding: 0 2px;
+    font-weight: bold;
 }
 #editor form label {
-  display: inline-block;
-  line-height: 1.8;
-  vertical-align: top;
+    display: inline-block;
+    line-height: 1.8;
+    vertical-align: top;
 }
 #editor form fieldset ol {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 #editor form fieldset li {
-  list-style: none;
-  padding: 5px;
-  margin: 0;
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+#editor form button {
+    width: 6em;
+    margin: 0 3px;
+}
+#editor form fieldset li.buttons {
+    text-align: right;
 }
