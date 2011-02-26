@@ -73,4 +73,5 @@ class BaseHandler (tornado.web.RequestHandler):
     def initialize (self, *args, **kw):
         self._args = kw
 
-        
+        # check for special form variable to indicate an alternate HTTP method because HTML sucks.
+        self.request.method = self.get_argument ('.method', self.request.method)

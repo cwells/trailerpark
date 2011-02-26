@@ -74,6 +74,9 @@ class RequestHandler (BaseHandler):
         if doc_id:
             self.couchdb.get_doc (doc_id, callback)
 
+    @tornado.web.asynchronous
+    def put (self, action='view/article', doc_id=''):
+        self.finish ()
 
     @tornado.web.asynchronous
     def head (self, action='view/article', doc_id=''):
