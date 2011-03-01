@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
 import logging
+import signal
+import time
+from functools import partial
 from base64 import b64encode
 
 import tornado.httpserver
@@ -57,13 +60,27 @@ class Application (tornado.web.Application):
 
 
 def main ():
-    http_server = tornado.httpserver.HTTPServer (
+    def sighup_handler (server, loop, signum, frame):
+        def stop_loop (loop):
+            loop.stop ()
+            logging.info ("Exited.")
+
+        def stop_server (server, loop):
+            logging.info ("Waiting for requests to finish")
+            server.stop ()
+            loop.add_timeout (time.time() + 5.0, partial (stop_loop, loop))
+
+        logging.info ("Exiting due to SIGHUP")
+        loop.add_callback (partial (stop_server, server, loop))
+
+    server = tornado.httpserver.HTTPServer (
         Application (),
         xheaders=True
     )
-    http_server.listen (options.port, address=options.address)
-
+    server.listen (options.port, address=options.address)
     loop = tornado.ioloop.IOLoop.instance ()
+    signal.signal (signal.SIGHUP, partial (sighup_handler, server, loop))
+
     if options.debug:
         loop.set_blocking_log_threshold (options.log_blocking) # issue warning if we block for over 100ms
     try:
