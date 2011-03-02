@@ -8,9 +8,10 @@ Trailerpark is a blog.
 **Requirements:**
 
  - Python 2.6 or later (3 not supported)
- - CouchDB
+ - CouchDB_
  - Tornado_
  - Breve_     
+ - Trombi_
  - Some plugins may have additional dependencies
 
 **Installation**
@@ -52,7 +53,8 @@ Nginx_ is recommended.  Here's a basic Nginx configuration for Trailerpark::
  }
 
 
-
+.. _CouchDB: http://couchdb.apache.org
 .. _Tornado: https://github.com/facebook/tornado
 .. _Breve:   https://github.com/cwells/breve
+.. _Trombi:  https://github.com/inoi/trombi
 .. _Nginx:   http://wiki.nginx.org

@@ -1,8 +1,10 @@
 import os, re, imp, logging
+from functools import partial
 import breve
+import trombi
 from tornado.options import options
-from libs import couch
-from libs.couch import BlockingCouch as CouchDB
+from tornado.ioloop import PeriodicCallback
+from libs.util import with_ioloop
 
 #
 # plugin api, unspecified values assume defaults below
@@ -32,35 +34,53 @@ class Plugins (object):
     templates (plugin) - returns template resources for a plugin
     macros (plugin)    - returns global macro definitions for a plugin
     '''
-    def __init__ (self):
+    @with_ioloop
+    def __init__ (ioloop, self):
         logging.info ("=== loading plugins ===")
         self._plugins = {}
+        self.couchdb = None
 
-        for p, target in options.plugins:
-            module = self.load (p, target)
-            if not module:
-                continue
-            self._plugins [p] = module
+        def callback (db):
+            self.couchdb = db
 
-        unmet = self.check_dependencies ()
-        options.plugins = [(p, t) for (p, t) in options.plugins 
-                           if (p in self._plugins and p not in unmet)]
-        if unmet:
-            logging.error ("unmet dependencies for plugins: %s" % ', '.join (unmet))
-            logging.info ("successfully loaded plugins: %s" % ', '.join (options.plugins))
-        else:
-            logging.info ("successfully loaded all plugins")
+            for p, target in options.plugins:
+                module = self.load (db, p, target)
+                if module:
+                    self._plugins [p] = module
 
-        self.configure_theme ()
+            unmet = self.check_dependencies ()
+            options.plugins = [(p, t) for (p, t) in options.plugins 
+                               if (p in self._plugins and p not in unmet)]
+            if unmet:
+                logging.error ("unmet dependencies for plugins: %s" % ', '.join (unmet))
+                logging.info ("successfully loaded plugins: %s" % ', '.join (options.plugins))
+            else:
+                logging.info ("successfully loaded all plugins")
 
-        if options.install:
-            logging.info ('Install completed!  Now restart without --install flag.')
-            raise SystemExit
+            self.configure_theme ()
 
-    def load (self, plugin, target=None):
+            if options.install:
+                def shutdown ():
+                    if ioloop._events or ioloop._callbacks:
+                        return
+                    ioloop.stop ()
+                    if options.install:
+                        logging.info ('Install completed!  Now restart without --install flag.')
+                        raise SystemExit
+
+                PeriodicCallback (shutdown, 1000, ioloop).start ()
+            else:
+                ioloop.stop ()
+                logging.info ('Trailerpark is ready.')
+
+        server = trombi.Server ('http://%s:%s' % (options.couch_host, options.couch_port))
+        server.get (options.couch_db, callback, create=True)
+
+    def load (self, db, plugin, target=None): 
         '''import and initialize a single plugin
         '''
         logging.info ("loading %s plugin" % plugin)
+
         try:
             module = imp.load_source (plugin, 'plugins/%s/plugin.py' % plugin)
         except SystemExit, e:
@@ -74,8 +94,8 @@ class Plugins (object):
         self.pluginify (module)
         module.target = target
         if options.install:
-            self.install (plugin, module)
-
+            self.install (db, plugin, module)
+                
         return module
 
     def __getitem__ (self, key):
@@ -138,38 +158,64 @@ class Plugins (object):
             if not hasattr (module, k):
                 setattr (module, k, v ())
 
-    def install (self, plugin, module):
+    def install (self, db, plugin, module):
         '''call each install procedure
         '''
-        couchdb = CouchDB (options.couch_db, options.couch_host, options.couch_port)
         for k in module.install:
             logging.info ('%s.install (%s)' % (plugin, k))
             method = "install_%s" % k
             if hasattr (self, method):
-                getattr (self, method)(couchdb, module.install [k])
+                getattr (self, method)(db, module.install [k])
+            else:
+                logging.error ('Unknown install method in %s: %s' % (plugin, method))
 
-    def install_docs (self, couchdb, docs):
+    def install_docs (self, db, docs):
         '''install procedure for couchdb docs
         '''
+        def get_cb (data, doc):
+            if not doc or doc.error: # create new doc
+                db.set (data, partial (set_cb, data))
+            else: # update existing doc
+                for k, v in data.items ():
+                    try:
+                        doc [k] = v 
+                    except KeyError: # can't update keys starting with underscore
+                        continue
+                db.set (data ['_id'], doc, partial (set_cb, data))
+        
+        def set_cb (data, doc):
+            if doc.error:
+                logging.warn ("Can't create doc: %s" % doc.msg)
+
         for d in docs:
-            try:
-                existing = couchdb.get_doc (d ['_id'])
-            except couch.NotFound:
-                existing = {}
-            existing.update (d)
-            couchdb.save_doc (existing)
+            _id = d ['_id']
+            db.get (_id, partial (get_cb, d))
             
-    def install_views (self, couchdb, vdefs):
+    def install_views (self, db, views):
         '''install procedure for couchdb views
         '''
         _id = '_design/%s' % options.couch_design
-        for v in vdefs:
-            try:
-                doc = couchdb.get_doc (_id)
-            except couch.NotFound:
-                doc = {}
-            doc ['views'].update (vdefs)
-            couchdb.save_doc (doc)
+
+        def get_cb (vdefs, view):
+            if view is None or view.error: # create new view
+                db.set (_id, {'views': vdefs}, set_cb)
+            else: # update existing view
+                for k, v in vdefs.items ():
+                    try:
+                        view [k] = v
+                    except KeyError:
+                        continue
+                db.set (_id, view, set_cb)
+
+        def set_cb (view):
+            if view.error:
+                logging.warn ("Can't create view: %s" % view.msg)
+
+        vdefs = {}
+        for v in views:
+            vdefs [v] = views [v]
+
+        db.get (_id, partial (get_cb, vdefs))
 
     def index (self, pageinfo, target=None):
         '''return a list of plugins for a named target

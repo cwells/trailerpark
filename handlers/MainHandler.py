@@ -1,7 +1,10 @@
 import logging
+from functools import partial
+import trombi
 import tornado
 from tornado.options import options
 from handlers.BaseHandler import BaseHandler, Template, Aggregator
+
 
 class RequestHandler (BaseHandler):
     @tornado.web.asynchronous
@@ -42,10 +45,11 @@ class RequestHandler (BaseHandler):
 
         if doc_id:
             ag += 'article'
-            self.couchdb.get_doc (doc_id, lambda values: ag ('article', values))
+            self.couchdb.get (doc_id, lambda values: ag ('article', values))
 
         for view in views:
-            self.couchdb.view (options.couch_design, view, lambda values, view=view: ag (view, values), limit=5)
+            self.couchdb.view (options.couch_design, view, 
+                               lambda values, view=view: ag (view, values, mapper=partial (trombi.Document, self.couchdb)), limit=5)
 
 
     @tornado.web.asynchronous
@@ -72,7 +76,7 @@ class RequestHandler (BaseHandler):
             self.couchdb.save_doc (doc, callback)
 
         if doc_id:
-            self.couchdb.get_doc (doc_id, callback)
+            self.couchdb.get (doc_id, callback)
 
     @tornado.web.asynchronous
     def put (self, action='view/article', doc_id=''):
@@ -104,5 +108,5 @@ class RequestHandler (BaseHandler):
 
         if doc_id:
             ag += 'article'
-            self.couchdb.get_doc (doc_id, lambda values: ag ('article', values))
+            self.couchdb.get (doc_id, lambda values: ag ('article', values))
         

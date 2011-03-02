@@ -1,9 +1,10 @@
+import logging 
+
 import tornado.web
 from tornado.web import _utf8
 from tornado import httpclient, httputil
 from tornado.options import options
 
-from libs.couch import AsyncCouch as CouchDB
 from libs.plugin import plugins
 
 import breve
@@ -56,8 +57,10 @@ class Aggregator (object):
         self.required = required
         self.values = { }
 
-    def __call__ (self, which, values):
-        self.values [which] = values # values might be Exception object
+    def __call__ (self, which, values, mapper=None):
+        if mapper:
+            values = map (mapper, values)
+        self.values [which] = values 
         if set (self.required) == set (self.values.keys ()):
             self.finish (self.values)
 
@@ -67,11 +70,12 @@ class Aggregator (object):
 
 
 class BaseHandler (tornado.web.RequestHandler):
-    couchdb = CouchDB (options.couch_db, options.couch_host, options.couch_port)
     plugins = plugins
+    couchdb = plugins.couchdb
 
     def initialize (self, *args, **kw):
         self._args = kw
 
         # check for special form variable to indicate an alternate HTTP method because HTML sucks.
         self.request.method = self.get_argument ('.method', self.request.method)
+

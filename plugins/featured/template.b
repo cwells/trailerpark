@@ -18,11 +18,11 @@ macro ('show_featured', lambda _i, _feature:
             div (class_="featured_content") [
                 ul (class_="featured_photo") [
                     [ show_featured_photo (_i, _f ['value']) 
-                      for _i, _f in enumerate (v.featured_articles ['rows']) ]
+                      for _i, _f in enumerate (v.featured_articles) ]
                 ],
                 ul (class_="featured_text") [
                     [ show_featured (_i, _f ['value']) 
-                      for _i, _f in enumerate (v.featured_articles ['rows']) ]
+                      for _i, _f in enumerate (v.featured_articles) ]
                 ]
             ]
         ] 

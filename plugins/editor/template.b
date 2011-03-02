@@ -1,6 +1,6 @@
 div (id='editor') [
-    form (action='/edit/article/%(_id)s' % v.article, method='POST') [
-        input (type='hidden', name='.redirect', value='/view/article/%(_id)s' % v.article),
+    form (action='/edit/article/%s' % v.article.id, method='POST') [
+        input (type='hidden', name='.redirect', value='/view/article/%s' % v.article.id),
         fieldset [
             legend [ "Article" ],
             ol [

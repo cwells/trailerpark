@@ -62,15 +62,17 @@ class Application (tornado.web.Application):
 def main ():
     def sighup_handler (server, loop, signum, frame):
         def stop_loop (loop):
+            logging.info ("Stopping IOloop")
             loop.stop ()
-            logging.info ("Exited.")
+            logging.info ("Done.")
 
         def stop_server (server, loop):
-            logging.info ("Waiting for requests to finish")
+            logging.info ("Stopping HTTP server")
             server.stop ()
-            loop.add_timeout (time.time() + 5.0, partial (stop_loop, loop))
+            loop.add_timeout (time.time () + 5.0, partial (stop_loop, loop))
+            logging.info ("Waiting for pending requests")
 
-        logging.info ("Exiting due to SIGHUP")
+        logging.info ("Graceful exit due to SIGHUP")
         loop.add_callback (partial (stop_server, server, loop))
 
     server = tornado.httpserver.HTTPServer (

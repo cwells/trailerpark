@@ -1,7 +1,7 @@
 ''' this plugin defines the schema and API for a blog
 '''
 
-depends  = ['installer', 'theme']
+depends  = ['theme']
 provides = 'blog'
 macros   = ['macros']
 install  = {

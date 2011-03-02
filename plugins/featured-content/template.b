@@ -22,10 +22,10 @@ macro ('featured_nav', lambda _i, _a:
 
 div ( id_="featured" ) [
     [ featured_image (_i + 1, _a ['value']) 
-      for _i, _a in enumerate (v.featured_articles ['rows']) ],
+      for _i, _a in enumerate (v.featured_articles) ],
 
     ul (class_="ui-tabs-nav") [
         [ featured_nav (_i + 1, _a ['value']) 
-          for _i, _a in enumerate (v.featured_articles ['rows']) ]
+          for _i, _a in enumerate (v.featured_articles) ]
     ]
 ]
