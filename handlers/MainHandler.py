@@ -45,12 +45,11 @@ class RequestHandler (BaseHandler):
 
         if doc_id:
             ag += 'article'
-            self.couchdb.get (doc_id, lambda values: ag ('article', values))
+            self.couchdb.get (doc_id, partial (ag, 'article'))
 
         for view in views:
-            self.couchdb.view (options.couch_design, view, 
-                               lambda values, view=view: ag (view, values, mapper=partial (trombi.Document, self.couchdb)), limit=5)
-
+            self.couchdb.view (options.couch_design, view,
+                               partial (ag, view, mapper=partial (trombi.Document, self.couchdb)), limit=5)
 
     @tornado.web.asynchronous
     def post (self, action='view/article', doc_id=''):
@@ -73,7 +72,7 @@ class RequestHandler (BaseHandler):
                            for k in self.request.arguments 
                            if not k.startswith ('.')])
             doc.update (args)
-            self.couchdb.save_doc (doc, callback)
+            self.couchdb.set (doc, callback)
 
         if doc_id:
             self.couchdb.get (doc_id, callback)
@@ -108,5 +107,5 @@ class RequestHandler (BaseHandler):
 
         if doc_id:
             ag += 'article'
-            self.couchdb.get (doc_id, lambda values: ag ('article', values))
+            self.couchdb.get (doc_id, partial (ag, 'article'))
         
