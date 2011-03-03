@@ -3,8 +3,6 @@ from functools import partial
 import breve
 import trombi
 from tornado.options import options
-from tornado.ioloop import PeriodicCallback
-from libs.util import with_ioloop
 
 #
 # plugin api, unspecified values assume defaults below
@@ -34,47 +32,25 @@ class Plugins (object):
     templates (plugin) - returns template resources for a plugin
     macros (plugin)    - returns global macro definitions for a plugin
     '''
-    @with_ioloop
-    def __init__ (ioloop, self):
+    def __init__ (self, db):
         logging.info ("=== loading plugins ===")
         self._plugins = {}
-        self.couchdb = None
 
-        def callback (db):
-            self.couchdb = db
+        for p, target in options.plugins:
+            module = self.load (db, p, target)
+            if module:
+                self._plugins [p] = module
 
-            for p, target in options.plugins:
-                module = self.load (db, p, target)
-                if module:
-                    self._plugins [p] = module
+        unmet = self.check_dependencies ()
+        options.plugins = [(p, t) for (p, t) in options.plugins 
+                           if (p in self._plugins and p not in unmet)]
+        if unmet:
+            logging.error ("unmet dependencies for plugins: %s" % ', '.join (unmet))
+            logging.info ("successfully loaded plugins: %s" % ', '.join (options.plugins))
+        else:
+            logging.info ("successfully loaded all plugins")
 
-            unmet = self.check_dependencies ()
-            options.plugins = [(p, t) for (p, t) in options.plugins 
-                               if (p in self._plugins and p not in unmet)]
-            if unmet:
-                logging.error ("unmet dependencies for plugins: %s" % ', '.join (unmet))
-                logging.info ("successfully loaded plugins: %s" % ', '.join (options.plugins))
-            else:
-                logging.info ("successfully loaded all plugins")
-
-            self.configure_theme ()
-
-            if options.install:
-                def shutdown ():
-                    if ioloop._events or ioloop._callbacks:
-                        return
-                    ioloop.stop ()
-                    if options.install:
-                        logging.info ('Install completed!  Now restart without --install flag.')
-                        raise SystemExit
-
-                PeriodicCallback (shutdown, 1000, ioloop).start ()
-            else:
-                ioloop.stop ()
-                logging.info ('Trailerpark is ready.')
-
-        server = trombi.Server ('http://%s:%s' % (options.couch_host, options.couch_port))
-        server.get (options.couch_db, callback, create=True)
+        self.configure_theme ()
 
     def load (self, db, plugin, target=None): 
         '''import and initialize a single plugin
@@ -277,11 +253,5 @@ class PluginTemplateLoader (object):
     
     def load (self, uid):
         return file (uid, 'U').read ()
-
-
-plugins = Plugins ()
-breve.register_global ('plugins', plugins)
-breve.register_global ('plugin_loader', PluginTemplateLoader ())
-
 
 

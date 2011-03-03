@@ -5,12 +5,14 @@ from tornado.web import _utf8
 from tornado import httpclient, httputil
 from tornado.options import options
 
-from libs.plugin import plugins
-
+import trombi
 import breve
 from breve.tags.html import tags as T
-from breve.flatten import flatten
 
+from libs.plugin import Plugins, PluginTemplateLoader
+
+# plugins = Plugins ()
+breve.register_global ('plugin_loader', PluginTemplateLoader ())
 
 breve.register_global ('config', {
     'blog_url': options.url,
@@ -18,6 +20,7 @@ breve.register_global ('config', {
     'blog_description': options.description,
     'blog_author': options.author
 })
+
 
 def Template ():
     return breve.Template (T, options.templates)
@@ -52,7 +55,13 @@ class UserError (tornado.web.HTTPError):
 
 
 class Aggregator (object):
+    '''used as a callback that accumulates results of multiple
+    separate callbacks and finishes when they are all accounted for
+    '''
     def __init__ (self, finish, required):
+        '''finish is a callback function to be invoked when all required callbacks are done
+        required is a list of names of callbacks (strings)
+        '''
         self.finish = finish
         self.required = required
         self.values = { }
@@ -70,12 +79,19 @@ class Aggregator (object):
 
 
 class BaseHandler (tornado.web.RequestHandler):
-    plugins = plugins
-    couchdb = plugins.couchdb
+    @classmethod
+    def dbcallback (cls, db):
+        cls.couchdb = db
+        cls.plugins = Plugins (db)
+        breve.register_global ('plugins', cls.plugins)
 
     def initialize (self, *args, **kw):
         self._args = kw
 
-        # check for special form variable to indicate an alternate HTTP method because HTML sucks.
+        # check for special form variable to indicate an 
+        # alternate HTTP method because HTML sucks.
         self.request.method = self.get_argument ('.method', self.request.method)
 
+
+server = trombi.Server ('http://%s:%s' % (options.couch_host, options.couch_port))
+server.get (options.couch_db, BaseHandler.dbcallback, create=options.install)

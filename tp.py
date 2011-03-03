@@ -32,14 +32,25 @@ define ("title",        default='Trailerpark', help="blog title", type=str)
 define ("description",  default='your trash, powered by tornado', help="blog description", type=str)
 define ("author",       default='', help="blog author", type=str)
 define ("plugins",      default=[], help="an ordered list of plugins to load", type=list)
-define ("install",      default=False, help="run installation plugin", type=bool)
+define ("install",      default=False, help="run install mode", type=bool)
+define ("debuginstall", default=False, help="debug install mode", type=bool)
 
 tornado.options.parse_config_file (options.config)
 tornado.options.parse_command_line ()
 options.cookie_secret = b64encode (options.secret)
 
-from handlers.MainHandler import RequestHandler
+if options.debug and options.install:
+    logging.error ("You have specified both --debug and --install, which is probably not what you want to do")
+    logging.error ("If you really want this, use --debuginstall instead")
+    logging.info ("Exiting")
+    raise SystemExit
 
+if options.debuginstall:
+    logging.warn ("Be aware that this mode can cause duplicate records and *lots* of revisions of documents.  See docs.")
+    options.install = True 
+    options.debug = True
+
+from handlers.MainHandler import RequestHandler
 
 class Application (tornado.web.Application):
     def __init__ (self):
@@ -60,33 +71,35 @@ class Application (tornado.web.Application):
 
 
 def main ():
-    def sighup_handler (server, loop, signum, frame):
-        def stop_loop (loop):
+    def sighup_handler (server, ioloop, signum, frame):
+        def stop_ioloop (ioloop):
             logging.info ("Stopping IOloop")
-            loop.stop ()
+            ioloop.stop ()
             logging.info ("Done.")
 
-        def stop_server (server, loop):
+        def stop_server (server, ioloop):
             logging.info ("Stopping HTTP server")
             server.stop ()
-            loop.add_timeout (time.time () + 5.0, partial (stop_loop, loop))
+            ioloop.add_timeout (time.time () + 5.0, partial (stop_ioloop, ioloop))
             logging.info ("Waiting for pending requests")
 
         logging.info ("Graceful exit due to SIGHUP")
-        loop.add_callback (partial (stop_server, server, loop))
+        ioloop.add_callback (partial (stop_server, server, ioloop))
 
     server = tornado.httpserver.HTTPServer (
         Application (),
         xheaders=True
     )
     server.listen (options.port, address=options.address)
-    loop = tornado.ioloop.IOLoop.instance ()
-    signal.signal (signal.SIGHUP, partial (sighup_handler, server, loop))
+
+    ioloop = tornado.ioloop.IOLoop.instance ()
+    signal.signal (signal.SIGHUP, partial (sighup_handler, server, ioloop))
 
     if options.debug:
-        loop.set_blocking_log_threshold (options.log_blocking) # issue warning if we block for over 100ms
+        ioloop.set_blocking_log_threshold (options.log_blocking) # issue warning if we block for log_blocking ms
+
     try:
-        loop.start ()
+        ioloop.start ()
     except KeyboardInterrupt:
         logging.info ("Exiting due to keyboard interrupt")
         raise SystemExit
